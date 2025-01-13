@@ -4,6 +4,13 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     background(255);
     noStroke();
+
+    let clearButton = createButton('Clear Canvas');
+    clearButton.position(10, 10);
+    clearButton.mousePressed(() => {
+        background(255); // Clear the canvas
+        circles = []; // Clear all stored circles
+    });
 }
 
 function draw() {
