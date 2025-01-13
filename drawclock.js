@@ -8,8 +8,8 @@ function setup() {
     let clearButton = createButton('Clear Canvas');
     clearButton.position(10, 10);
     clearButton.mousePressed(() => {
-        background(255); // Clear the canvas
-        circles = []; // Clear all stored circles
+        background(255);
+        circles = [];
     });
 }
 
