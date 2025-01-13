@@ -1,34 +1,40 @@
 let circles = [];
 
 function setup() {
-    createCanvas(600, 600);
-    background(0);
-
-    let clearButton = createButton('Clear Canvas');
-    clearButton.position(10, 10);
-    clearButton.mousePressed(() => {
-        background(0); // Clear the canvas
-        circles = []; // Clear all stored circles
-    });
+    createCanvas(windowWidth, windowHeight);
+    background(255);
+    noStroke();
 }
 
 function draw() {
-    background(0);
+    background(255); // Clear the canvas each frame
 
-    // Draw all circles currently in the array
-    noStroke();
-    fill(255);
-    for (let i = circles.length - 1; i >= 0; i--) {
-        let c = circles[i];
-        if (millis() - c.time > 30000) {
-            circles.splice(i, 1); // Remove circle after 30 seconds
-        } else {
-            circle(c.x, c.y, 15);
+    // Draw all circles and handle their lifetimes
+    let currentTime = millis();
+    for (let i = 0; i < circles.length; i++) {
+        let circle = circles[i];
+
+        // Draw the circle if it hasn't expired
+        if (currentTime < circle.expiryTime) {
+            fill(100, 150, 255, 150); // Blue with transparency
+            ellipse(circle.x, circle.y, circle.size);
         }
     }
 
-    // Add new circle when mouse is pressed
-    if (mouseIsPressed && mouseX < 600 && mouseY < 600 && mouseX > 0 && mouseY > 0) {
-        circles.push({ x: mouseX, y: mouseY, time: millis() });
+    // Remove expired circles
+    circles = circles.filter(circle => millis() < circle.expiryTime);
+
+
+    if (mouseIsPressed) {
+        let circleSize = 10;
+        let expiryTime;
+
+        if (circles.length === 0) {
+            expiryTime = millis() + 5000;
+        } else {
+            expiryTime = circles[circles.length - 1].expiryTime + 1000;
+        }
+
+        circles.push({ x: mouseX, y: mouseY, size: circleSize, expiryTime });
     }
 }
