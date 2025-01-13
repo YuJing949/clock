@@ -31,6 +31,13 @@ function draw() {
     // Remove expired circles
     circles = circles.filter(circle => millis() < circle.expiryTime);
 
+    if (circles.length === 0) {
+        fill(0); // Black text
+        textAlign(CENTER, CENTER);
+        textSize(32);
+        text("time is up", width / 2, height / 2);
+    }
+
 
     if (mouseIsPressed) {
         let circleSize = 20;
