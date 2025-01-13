@@ -21,9 +21,9 @@ function draw() {
     for (let i = 0; i < circles.length; i++) {
         let circle = circles[i];
 
-        // Draw the circle if it hasn't expired
+        
         if (currentTime < circle.expiryTime) {
-            fill(100, 150, 255, 150); // Blue with transparency
+            fill(100, 150, 255, 100);
             ellipse(circle.x, circle.y, circle.size);
         }
     }
@@ -33,7 +33,7 @@ function draw() {
 
 
     if (mouseIsPressed) {
-        let circleSize = 10;
+        let circleSize = 20;
         let expiryTime;
 
         if (circles.length === 0) {
