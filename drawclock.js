@@ -20,7 +20,7 @@ function draw() {
     fill(255);
     for (let i = circles.length - 1; i >= 0; i--) {
         let c = circles[i];
-        if (millis() - c.time > 30000) {
+        if (millis() - c.time > 3000) {
             circles.splice(i, 1); // Remove circle after 30 seconds
         } else {
             circle(c.x, c.y, 15);
